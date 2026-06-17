@@ -1,0 +1,6 @@
+{
+  "name": "Magnetify Moments",
+  "description": "Turning Memories into Magnets - Personalised Acrylic & Square Magnets for Couples, Families, and Babies.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
