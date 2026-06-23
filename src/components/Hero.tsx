@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Sparkles, ArrowRight, Image as ImageIcon, Heart, Gift, ShieldCheck } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -8,6 +8,15 @@ interface HeroProps {
 }
 
 export default function Hero({ onStartDesigning, onExploreGallery }: HeroProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 768px)');
+    setIsMobile(media.matches);
+    const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    media.addEventListener('change', listener);
+    return () => media.removeEventListener('change', listener);
+  }, []);
   // Decorative sample photos for floating acrylic magnets
   const samples = [
     {
@@ -180,13 +189,13 @@ export default function Hero({ onStartDesigning, onExploreGallery }: HeroProps) 
                   x: sample.x,
                   y: sample.y,
                 }}
-                transition={{
+                transition={isMobile ? { type: 'tween', duration: 0.2, delay: 0.1 * idx } : {
                   type: 'spring',
                   stiffness: 70,
                   damping: 15,
                   delay: 0.2 + idx * 0.15,
                 }}
-                whileHover={{
+                whileHover={isMobile ? undefined : {
                   scale: 1.08,
                   rotate: sample.rotation + (idx % 2 === 0 ? 3 : -3),
                   zIndex: 30,

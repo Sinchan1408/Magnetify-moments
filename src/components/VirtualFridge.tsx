@@ -67,6 +67,16 @@ export default function VirtualFridge({
   customMagnetsInStore,
   onSelectProductForCustomise
 }: VirtualFridgeProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 768px)');
+    setIsMobile(media.matches);
+    const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    media.addEventListener('change', listener);
+    return () => media.removeEventListener('change', listener);
+  }, []);
+
   const [fridgeItems, setFridgeItems] = useState<FridgeMagnet[]>(INITIAL_FRIDGE_ITEMS);
   const [activeItem, setActiveItem] = useState<string | null>(null);
   const [fridgeColor, setFridgeColor] = useState<'stainless' | 'pastel-pink' | 'charcoal'>('stainless');
@@ -378,7 +388,8 @@ export default function VirtualFridge({
                         rotate: item.rotate,
                         zIndex: isActive ? 20 : 10
                       }}
-                      whileHover={{ scale: item.scale * 1.05, transition: { duration: 0.15 } }}
+                      whileHover={isMobile ? undefined : { scale: item.scale * 1.05, transition: { duration: 0.15 } }}
+                      transition={isMobile ? { type: 'tween', duration: 0.15 } : undefined}
                       onClick={() => setActiveItem(item.id)}
                       className={`absolute w-28 sm:w-36 bg-white p-2 text-left rounded-xs transition-shadow cursor-pointer select-none border ${
                         isActive

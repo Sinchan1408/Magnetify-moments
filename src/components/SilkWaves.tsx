@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 
 export default function SilkWaves() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 768px)');
+    setIsMobile(media.matches);
+    const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    media.addEventListener('change', listener);
+    return () => media.removeEventListener('change', listener);
+  }, []);
+
+  if (isMobile) {
+    return (
+      <div className="fixed inset-0 w-screen h-screen overflow-hidden pointer-events-none -z-50 select-none bg-[#FAF8F5]">
+        {/* Hardware-accelerated luxury background gradient layers mimicking silk folds */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#FFFFFF] via-[#FAF8F5] to-[#EAD7C7] opacity-90" />
+        <div className="absolute top-[-20%] left-[-20%] w-[100vw] h-[100vw] rounded-full bg-radial from-white via-[#FAF8F5] to-transparent opacity-75 blur-3xl" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[80vw] h-[80vw] rounded-full bg-radial from-[#F3E5D8] to-transparent opacity-60 blur-3xl" />
+      </div>
+    );
+  }
+
   return (
     <div className="fixed inset-0 w-screen h-screen overflow-hidden pointer-events-none -z-50 select-none bg-[#FAF8F5]">
       {/* Luxurious Luster Light Reflection source - mimics gentle light shining on satin silk */}
