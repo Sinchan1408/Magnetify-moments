@@ -1,7 +1,6 @@
 import React from 'react';
 import { Sparkles, ArrowRight, Image as ImageIcon, Heart, Gift, ShieldCheck } from 'lucide-react';
 import { motion } from 'motion/react';
-import SilkWaves from './SilkWaves';
 
 interface HeroProps {
   onStartDesigning: () => void;
@@ -40,10 +39,8 @@ export default function Hero({ onStartDesigning, onExploreGallery }: HeroProps) 
   return (
     <section
       id="hero-section"
-      className="relative min-h-screen pt-28 pb-16 flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#FAF9F6] via-[#FAF9F6] to-[#FAF9F6]/50"
+      className="relative min-h-screen pt-28 pb-16 flex items-center justify-center overflow-hidden bg-transparent"
     >
-      {/* Pinkish Silk/Fabric Waves slow premium animation */}
-      <SilkWaves />
 
       {/* Background soft pastel watercolor shapes inspired by logo */}
       <div className="absolute top-1/4 right-[5%] w-[40vw] h-[40vw] max-w-lg rounded-full bg-gradient-to-tr from-[#FAF9F6] via-[#D27D6B]/5 to-[#D27D6B]/10 opacity-70 filter blur-3xl -z-10 pointer-events-none"></div>

@@ -154,7 +154,7 @@ export default function InteractiveDesigner({
   };
 
   return (
-    <section id="designer" className="py-24 px-4 bg-[#FAF9F6] border-t border-[#F2EFE9]">
+    <section id="designer" className="py-24 px-4 bg-transparent border-t border-[#F2EFE9]">
       <div className="max-w-7xl mx-auto">
         
         {/* Title */}
@@ -410,7 +410,7 @@ export default function InteractiveDesigner({
               <button
                 id="toggle-stand-btn"
                 onClick={() => setHasStand(!hasStand)}
-                className={`w-14 h-8 rounded-full p-1 transition-colors duration-200 focus:outline-none ${
+                className={`w-14 h-8 flex-shrink-0 rounded-full p-1 transition-colors duration-200 focus:outline-none ${
                   hasStand ? 'bg-[#D27D6B]' : 'bg-gray-300'
                 }`}
               >

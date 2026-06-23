@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ShoppingBag, Menu, X, Heart, Sparkles } from 'lucide-react';
+import { ShoppingBag, Menu, X, Heart } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface NavbarProps {
@@ -60,13 +60,10 @@ export default function Navbar({
               <span className="text-white font-bold font-sans text-sm">M</span>
             </div>
             
-            <div>
+            <div className="flex flex-col justify-center">
               <span className="text-xl font-serif font-bold tracking-tight text-[#2D2D2D] group-hover:text-[#D27D6B] transition-colors">
                 magnetify<span className="text-[#D27D6B]">.moments</span>
               </span>
-              <p className="text-[10px] text-gray-450 font-medium tracking-widest uppercase">
-                by Siri Jain
-              </p>
             </div>
           </div>
 

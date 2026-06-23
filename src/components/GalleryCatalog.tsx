@@ -38,7 +38,7 @@ export default function GalleryCatalog({
   };
 
   return (
-    <section id="gallery" className="py-24 px-4 bg-[#FAF9F6] border-t border-[#F2EFE9]">
+    <section id="gallery" className="py-24 px-4 bg-transparent border-t border-[#F2EFE9]">
       <div className="max-w-7xl mx-auto">
         
         {/* Title & Introduction */}

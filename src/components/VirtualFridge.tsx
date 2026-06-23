@@ -74,37 +74,40 @@ export default function VirtualFridge({
   // Automatically inject custom magnets designed by the user onto the fridge so they can see them live
   useEffect(() => {
     if (customMagnetsInStore.length > 0) {
-      // Avoid duplicate keys
-      const mapped = customMagnetsInStore.map((m, idx) => {
+      setFridgeItems(prev => {
         // Distribute coordinates nicely based on index
-        const col = idx % 2 === 0 ? 15 : 45;
-        const row = Math.min(75, 40 + idx * 10);
-        return {
-          id: m.id,
-          url: m.imageSrc,
-          caption: m.caption,
-          type: m.type,
-          x: col + (idx * 5) % 30,
-          y: row,
-          rotate: ((idx % 3) - 1) * 6,
-          scale: m.size === '2x2' ? 0.8 : m.size === '3x3' ? 1.0 : 1.2
-        };
-      });
+        const mapped = customMagnetsInStore.map((m, idx) => {
+          const col = idx % 2 === 0 ? 15 : 45;
+          const row = Math.min(75, 40 + idx * 10);
+          return {
+            id: m.id,
+            url: m.imageSrc,
+            caption: m.caption,
+            type: m.type,
+            x: col + (idx * 5) % 30,
+            y: row,
+            rotate: ((idx % 3) - 1) * 6,
+            scale: m.size === '2x2' ? 0.8 : m.size === '3x3' ? 1.0 : 1.2
+          };
+        });
 
-      // Filter out mapped items already present, ensuring absolutely no duplicate IDs are pushed
-      const uniqueNewItems: FridgeMagnet[] = [];
-      const seenIds = new Set(fridgeItems.map(item => item.id));
-      for (const item of mapped) {
-        if (!seenIds.has(item.id)) {
-          uniqueNewItems.push(item);
-          seenIds.add(item.id);
+        // Filter out mapped items already present, ensuring absolutely no duplicate IDs are pushed
+        const uniqueNewItems: FridgeMagnet[] = [];
+        const seenIds = new Set(prev.map(item => item.id));
+        for (const item of mapped) {
+          if (!seenIds.has(item.id)) {
+            uniqueNewItems.push(item);
+            seenIds.add(item.id);
+          }
         }
-      }
-      if (uniqueNewItems.length > 0) {
-        setFridgeItems(prev => [...prev, ...uniqueNewItems]);
-      }
+
+        if (uniqueNewItems.length > 0) {
+          return [...prev, ...uniqueNewItems];
+        }
+        return prev;
+      });
     }
-  }, [customMagnetsInStore, fridgeItems]);
+  }, [customMagnetsInStore]);
 
   const handleReset = () => {
     setFridgeItems(INITIAL_FRIDGE_ITEMS);
@@ -132,7 +135,7 @@ export default function VirtualFridge({
   };
 
   return (
-    <section id="playground" className="py-24 px-4 bg-[#FAF9F6] border-t border-[#F2EFE9]">
+    <section id="playground" className="py-24 px-4 bg-transparent border-t border-[#F2EFE9]">
       <div className="max-w-7xl mx-auto">
         
         {/* Slogan Intro */}

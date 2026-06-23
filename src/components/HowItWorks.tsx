@@ -25,7 +25,7 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section className="py-20 px-4 bg-[#FAF9F6]">
+    <section className="py-20 px-4 bg-transparent">
       <div className="max-w-7xl mx-auto text-center">
         
         {/* Title */}

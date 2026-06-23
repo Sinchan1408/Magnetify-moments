@@ -8,6 +8,7 @@ import VirtualFridge from './components/VirtualFridge';
 import FAQAndContact from './components/FAQAndContact';
 import CartDrawer from './components/CartDrawer';
 import { CustomMagnet, CartItem } from './types';
+import SilkWaves from './components/SilkWaves';
 import { Sparkles, Heart, Gift, Mail, ArrowUpCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -125,8 +126,11 @@ export default function App() {
   const totalCartUnits = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div id="magnetify-app-root" className="min-h-screen flex flex-col justify-between bg-[#FAF9F6] selection:bg-[#D27D6B]/20 selection:text-[#D27D6B]">
+    <div id="magnetify-app-root" className="min-h-screen flex flex-col justify-between bg-transparent selection:bg-[#D27D6B]/20 selection:text-[#D27D6B]">
       
+      {/* Luxury animated pinkish fabric silk waves motion graphics flowing globally in the background */}
+      <SilkWaves />
+
       {/* 1. Header & Navigation */}
       <Navbar
         cartCount={totalCartUnits}
